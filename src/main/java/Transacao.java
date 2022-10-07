@@ -2,6 +2,11 @@ package main.java;
 
 import java.util.Date;
 
+/**
+ *  A lógica por traz desta classe é poder armazenar as transações dentro de um
+ *  ArrayList, um wrapper de vetor, na classe ContaCorrente.
+ *  - Ciro
+ */
 public class Transacao {
     private Date data;
     private String tipo;

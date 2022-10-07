@@ -2,6 +2,11 @@ package main.java;
 
 import java.util.Date;
 
+/**
+ *  Criei a classe por conta das dicas do professor nos comunicados.
+ *  - Ciro
+ */
+
 public class Pessoa {
     private String nome;
     private String cpf;

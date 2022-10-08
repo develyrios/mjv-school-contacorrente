@@ -9,8 +9,5 @@
         <module name="mjv-school-contacorrente" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="mjv-school-contacorrente" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,5 +1,3 @@
-package main.java;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,13 +29,16 @@ public class ContaCorrente {
         this.saldo = saldo;
         this.cancelada = false;
     }
-
-    public void depositar(Double valor) {
-        // To do...
+    // revisar
+    public boolean depositar(Double valor) {
+      if (valor > 0 ) this.saldo += valor;
+      return (valor > 0);
     }
-
+    // revisar
     public void sacar(Double valor) {
-        // To do...
+        if (valor > saldo){
+            System.out.println("Saldo insuficiente,tente outro valor");
+        }
     }
 
     public Double consultarSaldo() {

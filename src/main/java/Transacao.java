@@ -1,5 +1,6 @@
-package main.java;
+package java;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -10,9 +11,9 @@ import java.util.Date;
 public class Transacao {
     private Date data;
     private String tipo;
-    private Double valor;
+    private BigDecimal valor;
 
-    public Transacao(Date data, String tipo, Double valor) {
+    public Transacao(Date data, String tipo, BigDecimal valor) {
         this.data = data;
         this.tipo = tipo;
         this.valor = valor;
@@ -26,7 +27,7 @@ public class Transacao {
         return tipo;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 }

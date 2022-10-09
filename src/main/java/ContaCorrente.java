@@ -1,3 +1,6 @@
+package java;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,44 +11,67 @@ import java.util.Date;
  * notificarem se algo deu errado e não de que algo deu certo.
  * = Ciro
  */
+
+
+/**
+ * substituímos todas as classes Double que envolvem transações de saldo/dinheiro para BigDecimal, para
+ * evitar possíveis erros e variações de cálculo que a classe double pode gerar. Isso acontece pela forma que
+ * a JVM interpreta valores double
+ * (referência: https://www.devmedia.com.br/java-bigdecimal-trabalhando-com-mais-precisao/30286)
+ * (Rodrigo)
+ */
 public class ContaCorrente {
     private Pessoa titular;
     private ArrayList<Transacao> transacoes;
-    private Double saldo;
+    private BigDecimal saldo;
     private Boolean cancelada;
 
     // Construtor padrão
     public ContaCorrente(Pessoa titular) {
         this.titular = titular;
         this.transacoes = new ArrayList<Transacao>();
-        this.saldo = 0.00;
+        this.saldo = BigDecimal.valueOf(0.00);
         this.cancelada = false;
     }
 
     // Construtor com saldo para testes
-    public ContaCorrente(Pessoa titular, Double saldo) {
+    public ContaCorrente(Pessoa titular, BigDecimal saldo) {
         this.titular = titular;
         this.transacoes = new ArrayList<Transacao>();
         this.saldo = saldo;
         this.cancelada = false;
     }
     // revisar
-    public boolean depositar(Double valor) {
-      if (valor > 0 ) this.saldo += valor;
-      return (valor > 0);
+    public void depositar(BigDecimal valor) {
+      if(valor.doubleValue() <= 0.00 ) {
+          throw new RuntimeException("Valor inválido");
+      }
+
+      //to do
+
     }
     // revisar
-    public void sacar(Double valor) {
-        if (valor > saldo){
-            System.out.println("Saldo insuficiente,tente outro valor");
+    public void sacar(BigDecimal valorSaque) {
+        if(valorSaque.doubleValue() <= 0.00) {
+            throw new RuntimeException("Valor inválido");
         }
-    }
 
-    public Double consultarSaldo() {
+
+
+        if(valorSaque.compareTo(this.saldo) != -1) {
+            throw new RuntimeException("Saldo insuficiente para essa transação");
+        }
+
+        this.saldo = this.saldo.subtract(valorSaque);
+        }
+
+
+
+    public BigDecimal consultarSaldo() {
         return saldo;
     }
 
-    public void transferir(ContaCorrente contaDestinataria, Double valor) {
+    public void transferir(ContaCorrente contaDestinataria, BigDecimal valor) {
         // To do...
     }
 

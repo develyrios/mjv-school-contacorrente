@@ -48,6 +48,7 @@ public class ContaCorrente {
         this.cancelada = false;
     }
 
+    // Mykaeli
     // revisar
     public void depositar(BigDecimal valor) {
       if(valor.doubleValue() <= 0.00 ) {
@@ -71,15 +72,17 @@ public class ContaCorrente {
         this.saldo = this.saldo.subtract(valorSaque);
     }
 
-    public BigDecimal consultarSaldo() {
-        return saldo;
-    }
-
+    // Bev
     public void transferir(ContaCorrente contaDestinataria, BigDecimal valor) {
         // To do...
     }
 
-    // Precisa de revisão, fiz somente por exemplo - Ciro
+    // Ciro
+    public BigDecimal consultarSaldo() {
+        return saldo;
+    }
+
+    // Ciro
     public void cancelarConta(String justificativa) {
         if(justificativa.isEmpty()) {
             throw new RuntimeException("Não foi declarada uma justificativa!");
@@ -88,6 +91,7 @@ public class ContaCorrente {
         this.cancelada = true;
     }
 
+    // Ciro
     public ArrayList<Transacao> consultarExtrato(Date dataInicio, Date dataFim) {
         // To do...
         return new ArrayList<Transacao>();

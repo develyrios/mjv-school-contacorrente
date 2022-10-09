@@ -22,13 +22,15 @@ import java.util.Date;
  * (Rodrigo)
  */
 public class ContaCorrente {
+    private String numeroConta;
     private Pessoa titular;
     private ArrayList<Transacao> transacoes;
     private BigDecimal saldo;
     private Boolean cancelada;
 
     // Construtor padrão
-    public ContaCorrente(Pessoa titular) {
+    public ContaCorrente(String numeroConta, Pessoa titular) {
+        this.numeroConta = numeroConta;
         this.titular = titular;
         this.transacoes = new ArrayList<Transacao>();
         this.saldo = new BigDecimal(0.00, new MathContext(3));
@@ -36,7 +38,8 @@ public class ContaCorrente {
     }
 
     // Construtor com saldo para testes
-    public ContaCorrente(Pessoa titular, BigDecimal saldo) {
+    public ContaCorrente(String numeroConta, Pessoa titular, BigDecimal saldo) {
+        this.numeroConta = numeroConta;
         this.titular = titular;
         this.transacoes = new ArrayList<Transacao>();
 

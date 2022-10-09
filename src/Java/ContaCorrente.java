@@ -50,20 +50,25 @@ public class ContaCorrente {
       //to do
 
     }
-    // revisar
+
+    // Parte Rodrigo
     public void sacar(BigDecimal valorSaque) {
+        // Erros internos
         if(valorSaque.doubleValue() <= 0.00) {
-            throw new RuntimeException("Valor inválido");
+            throw new RuntimeException("Valor inválido!");
         }
 
+        if(valorSaque.scale() > 2) {
+            throw new RuntimeException("Valor não tratado!");
+        }
 
-
+        // Erros de usuário
         if(valorSaque.compareTo(this.saldo) != -1) {
-            throw new RuntimeException("Saldo insuficiente para essa transação");
+            throw new RuntimeException("Saldo insuficiente para essa transação!");
         }
 
         this.saldo = this.saldo.subtract(valorSaque);
-        }
+    }
 
 
 

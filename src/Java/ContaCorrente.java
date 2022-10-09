@@ -1,6 +1,7 @@
 package Java;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,7 +31,7 @@ public class ContaCorrente {
     public ContaCorrente(Pessoa titular) {
         this.titular = titular;
         this.transacoes = new ArrayList<Transacao>();
-        this.saldo = BigDecimal.valueOf(0.00);
+        this.saldo = new BigDecimal(0.00, new MathContext(3));
         this.cancelada = false;
     }
 
@@ -38,9 +39,15 @@ public class ContaCorrente {
     public ContaCorrente(Pessoa titular, BigDecimal saldo) {
         this.titular = titular;
         this.transacoes = new ArrayList<Transacao>();
-        this.saldo = saldo;
+
+        // Validar saldo
+        this.validarValor(saldo);
+        this.saldo = new BigDecimal(0.00, new MathContext(3));
+
+        this.saldo = this.saldo.add(saldo);
         this.cancelada = false;
     }
+
     // revisar
     public void depositar(BigDecimal valor) {
       if(valor.doubleValue() <= 0.00 ) {
@@ -54,13 +61,7 @@ public class ContaCorrente {
     // Parte Rodrigo
     public void sacar(BigDecimal valorSaque) {
         // Erros internos
-        if(valorSaque.doubleValue() <= 0.00) {
-            throw new RuntimeException("Valor inválido!");
-        }
-
-        if(valorSaque.scale() > 2) {
-            throw new RuntimeException("Valor não tratado!");
-        }
+        this.validarValor(valorSaque);
 
         // Erros de usuário
         if(valorSaque.compareTo(this.saldo) != -1) {
@@ -69,8 +70,6 @@ public class ContaCorrente {
 
         this.saldo = this.saldo.subtract(valorSaque);
     }
-
-
 
     public BigDecimal consultarSaldo() {
         return saldo;
@@ -92,5 +91,19 @@ public class ContaCorrente {
     public ArrayList<Transacao> consultarExtrato(Date dataInicio, Date dataFim) {
         // To do...
         return new ArrayList<Transacao>();
+    }
+
+    /**
+     * Método para descobrir se o valor é um número positivo diferente de 0 e somente
+     * duas casas decimais.
+     */
+    private void validarValor(BigDecimal valor) {
+        if(valor.doubleValue() <= 0.00) {
+            throw new RuntimeException("Valor inválido!");
+        }
+
+        if(valor.scale() > 2) {
+            throw new RuntimeException("Valor não tratado!");
+        }
     }
 }

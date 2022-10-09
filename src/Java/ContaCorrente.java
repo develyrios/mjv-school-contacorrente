@@ -93,8 +93,27 @@ public class ContaCorrente {
 
     // Ciro
     public ArrayList<Transacao> consultarExtrato(Date dataInicio, Date dataFim) {
-        // To do...
-        return new ArrayList<Transacao>();
+        Date hoje = new Date();
+
+        // Erros de usuário
+        if(dataInicio.after(dataFim)) {
+            throw new RuntimeException("Data inicial é mais recente que a data final!");
+        }
+
+        if((dataInicio.after(hoje)) || (dataFim.after(hoje))) {
+            throw new RuntimeException("Não de pode escolher uma data no futuro!");
+        }
+
+        ArrayList<Transacao> extrato = new ArrayList<Transacao>();
+        for(int i = 0; i > transacoes.size(); i++) {
+            Date dataTransacao = transacoes.get(i).getData();
+
+            if((dataTransacao.after(dataInicio)) && (dataTransacao.before(dataFim))) {
+                extrato.add(transacoes.get(i));
+            }
+        }
+
+        return extrato;
     }
 
     /**

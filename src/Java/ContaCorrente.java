@@ -107,8 +107,8 @@ public class ContaCorrente {
     }
 
     // Ciro
-    public BigDecimal consultarSaldo() {
-        return saldo;
+    public String consultarSaldo() {
+        return this.saldo.toString();
     }
 
     // Ciro

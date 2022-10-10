@@ -10,12 +10,12 @@ import java.util.Date;
  */
 public class Transacao {
     private Date data;
-    private String tipo;
+    private String descricao;
     private BigDecimal valor;
 
-    public Transacao(Date data, String tipo, BigDecimal valor) {
+    public Transacao(Date data, String descricao, BigDecimal valor) {
         this.data = data;
-        this.tipo = tipo;
+        this.descricao = descricao;
         this.valor = valor;
     }
 
@@ -23,8 +23,8 @@ public class Transacao {
         return data;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getDescricao() {
+        return descricao;
     }
 
     public BigDecimal getValor() {

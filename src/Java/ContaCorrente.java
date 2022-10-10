@@ -72,7 +72,7 @@ public class ContaCorrente {
         this.validarValor(valorSaque);
 
         // Erros de usuário
-        if(valorSaque.compareTo(this.saldo) != -1) {
+        if(valorSaque.compareTo(this.saldo) == 1) {
             throw new RuntimeException("Saldo insuficiente para essa transação!");
         }
 
@@ -85,7 +85,7 @@ public class ContaCorrente {
     public void transferir(ContaCorrente contaDestinataria, BigDecimal valorTransferencia) {
         this.validarValor(valorTransferencia);
 
-        if(valorTransferencia.compareTo(this.saldo) != -1) {
+        if(valorTransferencia.compareTo(this.saldo) == 1) {
             throw new RuntimeException("Saldo insuficiente para essa transação!");
         }
 

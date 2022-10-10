@@ -51,6 +51,10 @@ public class ContaCorrente {
         this.cancelada = false;
     }
 
+    public String getNumeroConta() {
+        return numeroConta;
+    }
+
     // Mykaeli
     // revisar
     public void depositar(BigDecimal valor) {

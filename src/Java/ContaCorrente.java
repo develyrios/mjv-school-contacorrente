@@ -99,7 +99,6 @@ public class ContaCorrente {
     // Bev
     private void depositarTranferencia(BigDecimal valorTransferencia, ContaCorrente remetente) {
         this.saldo = this.saldo.add(valorTransferencia);
-        
 
         this.transacoes.add(new Transacao(new Date(), ("Tranferência de " + remetente.getNumeroConta()),
                 valorTransferencia));
@@ -133,7 +132,7 @@ public class ContaCorrente {
         }
 
         ArrayList<Transacao> extrato = new ArrayList<Transacao>();
-        for(int i = 0; i > this.transacoes.size(); i++) {
+
         for(int i = 0; i < this.transacoes.size(); i++) {
             Date dataTransacao = this.transacoes.get(i).getData();
 

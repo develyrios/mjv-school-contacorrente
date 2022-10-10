@@ -134,11 +134,11 @@ public class ContaCorrente {
         }
 
         ArrayList<Transacao> extrato = new ArrayList<Transacao>();
-        for(int i = 0; i > transacoes.size(); i++) {
-            Date dataTransacao = transacoes.get(i).getData();
+        for(int i = 0; i > this.transacoes.size(); i++) {
+            Date dataTransacao = this.transacoes.get(i).getData();
 
             if((dataTransacao.after(dataInicio)) && (dataTransacao.before(dataFim))) {
-                extrato.add(transacoes.get(i));
+                extrato.add(this.transacoes.get(i));
             }
         }
 

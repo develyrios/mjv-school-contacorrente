@@ -76,9 +76,9 @@ public class ContaCorrente {
             throw new RuntimeException("Saldo insuficiente para essa transação!");
         }
 
-        this.transacoes.add(new Transacao(new Date(), "Saque", valorSaque));
-
         this.saldo = this.saldo.subtract(valorSaque);
+
+        this.transacoes.add(new Transacao(new Date(), "Saque", valorSaque));
     }
 
     // Bev
@@ -92,18 +92,18 @@ public class ContaCorrente {
         //Depósito do valor transferido na conta que recebeu
         contaDestinataria.depositarTranferencia(valorTransferencia, this);
 
+        this.saldo = this.saldo.subtract(valorTransferencia);
+
         this.transacoes.add(new Transacao(new Date(), ("Tranferência para " + contaDestinataria.getNumeroConta()),
                 valorTransferencia));
-
-        this.saldo = this.saldo.subtract(valorTransferencia);
     }
 
     // Bev
     private void depositarTranferencia(BigDecimal valorTransferencia, ContaCorrente remetente) {
+        this.saldo = this.saldo.add(valorTransferencia);
+        
         this.transacoes.add(new Transacao(new Date(), ("Tranferência de " + remetente.getNumeroConta()),
                 valorTransferencia));
-
-        this.saldo = this.saldo.add(valorTransferencia);
     }
 
     // Ciro
@@ -149,6 +149,7 @@ public class ContaCorrente {
      * Método para descobrir se o valor é um número positivo diferente de 0 e somente
      * duas casas decimais.
      */
+    // Lucas Silva
     private void validarValor(BigDecimal valor) {
         if(valor.doubleValue() <= 0.00) {
             throw new RuntimeException("Valor inválido!");

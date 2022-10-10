@@ -83,11 +83,27 @@ public class ContaCorrente {
 
     // Bev
     public void transferir(ContaCorrente contaDestinataria, BigDecimal valorTransferencia) {
-        //Retirada do valor transferido da conta que enviou
-        sacar(valorTransferencia);
+        this.validarValor(valorTransferencia);
+
+        if(valorTransferencia.compareTo(this.saldo) != -1) {
+            throw new RuntimeException("Saldo insuficiente para essa transação!");
+        }
 
         //Depósito do valor transferido na conta que recebeu
-        contaDestinataria.depositar(valorTransferencia);
+        contaDestinataria.depositarTranferencia(valorTransferencia, this);
+
+        this.transacoes.add(new Transacao(new Date(), ("Tranferência para " + contaDestinataria.getNumeroConta()),
+                valorTransferencia));
+
+        this.saldo = this.saldo.subtract(valorTransferencia);
+    }
+
+    // Bev
+    private void depositarTranferencia(BigDecimal valorTransferencia, ContaCorrente remetente) {
+        this.transacoes.add(new Transacao(new Date(), ("Tranferência de " + remetente.getNumeroConta()),
+                valorTransferencia));
+
+        this.saldo = this.saldo.add(valorTransferencia);
     }
 
     // Ciro

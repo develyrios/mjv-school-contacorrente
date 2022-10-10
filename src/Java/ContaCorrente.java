@@ -72,6 +72,8 @@ public class ContaCorrente {
             throw new RuntimeException("Saldo insuficiente para essa transação!");
         }
 
+        transacoes.add(new Transacao(new Date(), "Saque", valorSaque));
+
         this.saldo = this.saldo.subtract(valorSaque);
     }
 

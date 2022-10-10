@@ -76,8 +76,12 @@ public class ContaCorrente {
     }
 
     // Bev
-    public void transferir(ContaCorrente contaDestinataria, BigDecimal valor) {
-        // To do...
+    public void transferir(ContaCorrente contaDestinataria, BigDecimal valorTransferencia) {
+        //Retirada do valor transferido da conta que enviou
+        sacar(valorTransferencia);
+
+        //Depósito do valor transferido na conta que recebeu
+        contaDestinataria.depositar(valorTransferencia);
     }
 
     // Ciro

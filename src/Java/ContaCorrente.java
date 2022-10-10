@@ -56,14 +56,12 @@ public class ContaCorrente {
     }
 
     // Mykaeli
-    // revisar
-    public void depositar(BigDecimal valor) {
-      if(valor.doubleValue() <= 0.00 ) {
-          throw new RuntimeException("Valor inválido");
-      }
+    public void depositar(BigDecimal valorDeposito) {
+        this.validarValor(valorDeposito);
 
-      //to do
+        this.saldo = this.saldo.add(valorDeposito);
 
+        this.transacoes.add(new Transacao(new Date(), "Depósito", valorDeposito));
     }
 
     // Parte Rodrigo
@@ -102,6 +100,7 @@ public class ContaCorrente {
     private void depositarTranferencia(BigDecimal valorTransferencia, ContaCorrente remetente) {
         this.saldo = this.saldo.add(valorTransferencia);
         
+
         this.transacoes.add(new Transacao(new Date(), ("Tranferência de " + remetente.getNumeroConta()),
                 valorTransferencia));
     }
@@ -135,6 +134,7 @@ public class ContaCorrente {
 
         ArrayList<Transacao> extrato = new ArrayList<Transacao>();
         for(int i = 0; i > this.transacoes.size(); i++) {
+        for(int i = 0; i < this.transacoes.size(); i++) {
             Date dataTransacao = this.transacoes.get(i).getData();
 
             if((dataTransacao.after(dataInicio)) && (dataTransacao.before(dataFim))) {

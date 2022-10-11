@@ -1,5 +1,10 @@
 package Java;
 
+import JavaErrors.InsufficientFundsException;
+import JavaErrors.InvalidDateException;
+import JavaErrors.MissingMotiveException;
+import JavaErrors.ValueNotHandledException;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
@@ -55,6 +60,14 @@ public class ContaCorrente {
         return numeroConta;
     }
 
+    public Boolean getCancelada() {
+        return cancelada;
+    }
+
+    public ArrayList<Transacao> getTransacoes() {
+        return transacoes;
+    }
+
     // Mykaeli
     public void depositar(BigDecimal valorDeposito) {
         this.validarValor(valorDeposito);
@@ -71,7 +84,7 @@ public class ContaCorrente {
 
         // Erros de usuário
         if(valorSaque.compareTo(this.saldo) == 1) {
-            throw new RuntimeException("Saldo insuficiente para essa transação!");
+            throw new InsufficientFundsException();
         }
 
         this.saldo = this.saldo.subtract(valorSaque);
@@ -84,7 +97,7 @@ public class ContaCorrente {
         this.validarValor(valorTransferencia);
 
         if(valorTransferencia.compareTo(this.saldo) == 1) {
-            throw new RuntimeException("Saldo insuficiente para essa transação!");
+            throw new InsufficientFundsException();
         }
 
         //Depósito do valor transferido na conta que recebeu
@@ -105,14 +118,14 @@ public class ContaCorrente {
     }
 
     // Ciro
-    public String consultarSaldo() {
-        return this.saldo.toString();
+    public BigDecimal consultarSaldo() {
+        return this.saldo;
     }
 
     // Ciro
     public void cancelarConta(String justificativa) {
         if(justificativa.isEmpty()) {
-            throw new RuntimeException("Não foi declarada uma justificativa!");
+            throw new MissingMotiveException();
         }
 
         this.cancelada = true;
@@ -124,11 +137,11 @@ public class ContaCorrente {
 
         // Erros de usuário
         if(dataInicio.after(dataFim)) {
-            throw new RuntimeException("Data inicial é mais recente que a data final!");
+            throw new InvalidDateException();
         }
 
         if((dataInicio.after(hoje)) || (dataFim.after(hoje))) {
-            throw new RuntimeException("Não de pode escolher uma data no futuro!");
+            throw new InvalidDateException();
         }
 
         ArrayList<Transacao> extrato = new ArrayList<Transacao>();
@@ -151,11 +164,11 @@ public class ContaCorrente {
     // Lucas Silva
     private void validarValor(BigDecimal valor) {
         if(valor.doubleValue() <= 0.00) {
-            throw new RuntimeException("Valor inválido!");
+            throw new ValueNotHandledException();
         }
 
         if(valor.scale() > 2) {
-            throw new RuntimeException("Valor não tratado!");
+            throw new ValueNotHandledException();
         }
     }
 }
